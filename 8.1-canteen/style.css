@@ -1,0 +1,70 @@
+/* 作业 8.1 · 云大干饭指南
+   样式模块：在作业三 them-page 的 food-card 基础上扩展 */
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  margin: 0;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== 区块布局（复用 8.0 integration 的 page-section 方案） ===== */
+.page-section {
+  min-height: calc(100vh - 56px);
+  padding: 90px 0 60px;
+  scroll-margin-top: 70px;
+}
+#chart, #foods { padding-bottom: 40px; }
+
+.section-title { font-weight: 700; margin-bottom: 8px; }
+.section-subtitle { color: #6c757d; margin-bottom: 24px; }
+
+/* ===== 筛选 chips（交互模块，后续检查点接入） =====
+.chip { ... 待实现 ... } */
+
+/* ===== food-card：直接继承作业三 them-page 的样式基因 ===== */
+.food-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.food-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+.food-card h3 {
+  margin-top: 0;
+  color: #0b5ed7;
+  font-size: 1.1rem;
+}
+.food-card .food-meta {
+  color: #6c757d;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+.food-card p { margin-bottom: 6px; }
+/* .food-votes / .badge-mine（票数与"我的推荐"徽章）：交互模块接入时添加 */
+
+/* ===== 导航高亮（滚动同步） ===== */
+.navbar-dark .nav-link { color: rgba(255,255,255,0.7); transition: color 0.2s; }
+.navbar-dark .nav-link:hover { color: #fff; }
+.navbar-dark .nav-link.active { color: #fff; font-weight: 600; }
+
+/* 自查表结果列绿色标注：质量自查实测后接入 */
+
+/* ===== footer ===== */
+.footer { margin-top: auto; }
+
+/* ===== 三档宽度自适应说明 =====
+   卡片栅格在 HTML 上：col-12（手机1列）/ col-sm-6（平板2列）/ col-lg-4（桌面3列）
+   导航在 <992px 折叠为汉堡菜单（navbar-expand-lg），均为 Bootstrap 标准断点 */
+@media (min-width: 992px) {
+  .food-card { padding: 24px; }
+}

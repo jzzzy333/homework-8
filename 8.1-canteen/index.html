@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校内食堂推荐 · 云大干饭指南</title>
+  <!-- 本地离线库（复用 homework-6 的 libs）：断网也能保持样式完整 -->
+  <link href="libs/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 统一入口导航：四个锚点区块，同一主题串联 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#foods">云大干饭指南</a>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="切换导航">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#foods">推荐榜单</a></li>
+          <li class="nav-item"><a class="nav-link" href="#recommend">我来推荐</a></li>
+          <li class="nav-item"><a class="nav-link" href="#chart">数据看板</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">质量自查</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- 模块一 · 页面：推荐榜单（静态复用作业三 them-page 的 6 条内容；筛选交互后续检查点接入） -->
+    <section id="foods" class="page-section">
+      <div class="container">
+        <h1 class="section-title">校内食堂推荐店家</h1>
+        <p class="section-subtitle">复用作业三 them-page 内容 · 筛选与数据驱动将在后续检查点接入</p>
+        <div class="row g-3">
+          <div class="col-12 col-sm-6 col-lg-4">
+            <article class="food-card">
+              <h3>贵阳水煮菜</h3>
+              <div class="food-meta">楠苑食堂 · 一楼</div>
+              <p>就是得快点吃，不然肉会在砂锅里闷老</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <article class="food-card">
+              <h3>硕阳小吃辣子鸡</h3>
+              <div class="food-meta">楠苑食堂 · 二楼</div>
+              <p>辣子鸡有锅气</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <article class="food-card">
+              <h3>三楼承包食堂</h3>
+              <div class="food-meta">楠苑食堂 · 三楼</div>
+              <p>菜价普遍比一楼贵，但胜在人少排队快</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <article class="food-card">
+              <h3>承包食堂</h3>
+              <div class="food-meta">梓园食堂 · 一楼</div>
+              <p>便宜又好吃</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <article class="food-card">
+              <h3>小锅猪肚鸡</h3>
+              <div class="food-meta">梓园食堂 · 二楼</div>
+              <p>同学口口相传的暖胃首选</p>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <article class="food-card">
+              <h3>傣味菠萝饭</h3>
+              <div class="food-meta">梓园食堂 · 二楼</div>
+              <p>酸甜开胃，一到饭点就排队</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 模块二 · 交互占位：我来推荐（表单 + localStorage 将在后续检查点实现） -->
+    <section id="recommend" class="page-section bg-light">
+      <div class="container">
+        <h2 class="section-title">我来推荐</h2>
+        <p class="text-muted">[ 模块占位 ] 这里将放推荐表单（菜品 / 食堂 / 楼层 / 理由），提交后写入榜单与数据看板。</p>
+      </div>
+    </section>
+
+    <!-- 模块三 · 数据可视化占位：数据看板（ECharts 图表将在后续检查点接入） -->
+    <section id="chart" class="page-section">
+      <div class="container">
+        <h2 class="section-title">数据看板</h2>
+        <p class="text-muted">[ 模块占位 ] 这里将放各食堂推荐热度柱状图，与榜单共用同一份数据。</p>
+      </div>
+    </section>
+
+    <!-- 模块四 · 自查记录占位（断网 / 空数据 / 三档宽度 / Console，后续检查点实测后填写） -->
+    <section id="about" class="page-section bg-light">
+      <div class="container">
+        <h2 class="section-title">质量自查记录</h2>
+        <p class="text-muted">[ 模块占位 ] 将按课程质量清单填写：断网、空数据、三档宽度、Console 四项实测结果。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer py-3 bg-dark text-light">
+    <div class="container text-center">
+      <small>云大干饭指南 · 作业 8.1 骨架 · 页面 + 样式 + 交互 + 数据可视化 四模块规划 · 口味主观仅供参考</small>
+    </div>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

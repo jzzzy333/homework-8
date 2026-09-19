@@ -1,0 +1,12 @@
+{
+  "title": "校内食堂推荐榜",
+  "source": "作业三 them-page 内容整理（模拟票数）",
+  "items": [
+    { "id": 1, "name": "贵阳水煮菜", "canteen": "楠苑", "floor": "一楼", "note": "就是得快点吃，不然肉会在砂锅里闷老", "votes": 12 },
+    { "id": 2, "name": "硕阳小吃辣子鸡", "canteen": "楠苑", "floor": "二楼", "note": "辣子鸡有锅气", "votes": 9 },
+    { "id": 3, "name": "三楼承包食堂", "canteen": "楠苑", "floor": "三楼", "note": "菜价普遍比一楼贵，但胜在人少排队快", "votes": 7 },
+    { "id": 4, "name": "承包食堂", "canteen": "梓园", "floor": "一楼", "note": "便宜又好吃", "votes": 15 },
+    { "id": 5, "name": "小锅猪肚鸡", "canteen": "梓园", "floor": "二楼", "note": "同学口口相传的暖胃首选", "votes": 11 },
+    { "id": 6, "name": "傣味菠萝饭", "canteen": "梓园", "floor": "二楼", "note": "酸甜开胃，一到饭点就排队", "votes": 10 }
+  ]
+}
