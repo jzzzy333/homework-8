@@ -14,7 +14,7 @@ const SEED = [
   { id: 4, shop: '承包食堂（一楼）', dish: '家常小炒',   canteen: '梓园', floor: '一楼', score: 4, note: '便宜又好吃' },
   { id: 5, shop: '小锅猪肚鸡',       dish: '猪肚鸡',     canteen: '梓园', floor: '二楼', score: 4, note: '同学口口相传的暖胃首选' },
   { id: 6, shop: '傣味菠萝饭',       dish: '菠萝饭',     canteen: '梓园', floor: '二楼', score: 5, note: '酸甜开胃，一到饭点就排队' },
-  { id: 7, shop: '生煎包子铺',       dish: '生煎包',     canteen: '东门', floor: '小吃街', score: 5, note: '好吃无需多言' }
+  { id: 7, shop: '生煎包子铺',       dish: '生煎包',     canteen: '东门', floor: '', score: 5, note: '好吃无需多言' }
 ];
 
 const STORE_KEY = 'canteen-recs-mine';
