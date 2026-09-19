@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>校园三维 · 校园信息中心</title>
+  <title>校园三维导览 · 校园信息中心</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
+  <!-- A-Frame：从作业七搬来的本地离线包 -->
+  <script src="libs/aframe.min.js"></script>
 </head>
 <body>
 
@@ -29,12 +31,49 @@
   </nav>
 
   <main>
-    <section id="campus3d" class="page-section">
+    <section id="campus3d" class="page-section page-section-3d">
       <div class="container">
-        <h1 class="section-title">校园三维</h1>
-        <p class="text-muted">[ 模块占位 ] 这里将来嵌入 Three.js 或 A-Frame 三维场景：教学楼、宿舍、操场等校园鸟瞰或沉浸式漫游。当前为骨架，下一步会接入 3D 资产。</p>
-        <div class="placeholder-3d">
-          <span>3D Canvas · 占位区</span>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h1 class="section-title">校园三维导览</h1>
+            <p class="text-muted mb-0">复用作业七校园角落场景 · 鼠标拖动转视角 / WASD 移动</p>
+          </div>
+          <a href="index.html#home" class="btn btn-outline-light btn-sm">← 返回首页</a>
+        </div>
+
+        <!-- A-Frame 嵌入式场景：embedded 属性让它不全屏，由容器高度决定大小 -->
+        <div class="aframe-stage">
+          <a-scene embedded class="aframe-canvas" vr-mode-ui="enabled: false">
+
+            <!-- 环境：天空 + 地面 -->
+            <a-sky color="#aee3f7"></a-sky>
+            <a-plane position="0 0 -4" rotation="-90 0 0"
+                     width="20" height="20" color="#7cb342"></a-plane>
+
+            <!-- 主体：教学楼（方盒 + 红屋顶） -->
+            <a-box position="0 1.2 -6" width="4" height="2.4" depth="2" color="#efeeee"></a-box>
+            <a-box position="0 2.7 -6" width="4.4" height="0.4" depth="2.4" color="#b71c1c"></a-box>
+
+            <!-- 旗杆与旗帜（旗帜带飘扬动画） -->
+            <a-cylinder position="3 1.8 -5" radius="0.05" height="3.6" color="#9e9e9e"></a-cylinder>
+            <a-box position="3.35 3.3 -5" width="0.7" height="0.45" depth="0.03" color="#e53935"
+                   animation="property: position; to: 3.4 3.3 -5; dir: alternate; dur: 900; loop: true">
+            </a-box>
+
+            <!-- 路灯：杆 + 发光球（点光源） -->
+            <a-cylinder position="-3 1.2 -4" radius="0.06" height="2.4" color="#616161"></a-cylinder>
+            <a-sphere position="-3 2.5 -4" radius="0.18" color="#fff59d"
+                      animation="property: scale; to: 1.3 1.3 1.3; dir: alternate; dur: 1200; loop: true">
+            </a-sphere>
+            <a-light type="point" position="-3 2.6 -4" color="#fff59d" intensity="0.6"></a-light>
+
+            <!-- 环境光 -->
+            <a-light type="ambient" color="#ffffff" intensity="0.7"></a-light>
+
+            <!-- 相机初始位：平视校园 -->
+            <a-camera position="0 1.8 2" look-controls="reverseMouseTouch: false"
+                      wasd-controls="acceleration: 15"></a-camera>
+          </a-scene>
         </div>
       </div>
     </section>
@@ -42,11 +81,10 @@
 
   <footer class="footer mt-auto py-3 bg-dark text-light">
     <div class="container text-center">
-      <small>校园三维 · 骨架版</small>
+      <small>校园三维导览 · 复用作业七校园角落场景</small>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
