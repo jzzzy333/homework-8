@@ -1,5 +1,11 @@
 {
-  "placeholder": "骨架阶段占位，下一步接入自习室空位、统计图表、3D 场景数据",
-  "modules": ["study-room", "stats", "campus3d"],
-  "version": "skeleton-1.0"
+  "title": "自习室使用量统计",
+  "source": "校园信息中心 · 模拟数据集",
+  "unit": "人次",
+  "rooms": ["A101", "A201", "A301", "B102", "B202"],
+  "series": [
+    { "category": "上午", "counts": [85, 92, 70, 60, 55] },
+    { "category": "下午", "counts": [120, 135, 95, 80, 70] },
+    { "category": "晚上", "counts": [150, 160, 110, 90, 85] }
+  ]
 }

@@ -69,19 +69,46 @@
       </div>
     </section>
 
-    <!-- 自习室模块 -->
+    <!-- 自习室模块：复用作业五的筛选模式（currentFilter + 事件委托） -->
     <section id="study-room" class="page-section bg-light">
       <div class="container">
         <h2 class="section-title">自习室</h2>
-        <p class="text-muted">[ 模块占位 ] 这里将展示自习室空位、预约、提醒等内容。当前为骨架，下一步会接入数据与交互。</p>
+        <p class="text-muted">数据写死在 app.js 顶部，演示楼层 / 开放状态双维度筛选。</p>
+
+        <!-- 筛选按钮组：按楼层 -->
+        <div class="filter-group mb-2">
+          <span class="filter-label">楼层：</span>
+          <div class="btn-group btn-group-sm" data-filter-key="floor">
+            <button class="btn btn-outline-secondary active" data-filter="all">全部</button>
+            <button class="btn btn-outline-secondary" data-filter="1">1F</button>
+            <button class="btn btn-outline-secondary" data-filter="2">2F</button>
+            <button class="btn btn-outline-secondary" data-filter="3">3F</button>
+          </div>
+        </div>
+
+        <!-- 筛选按钮组：按开放状态 -->
+        <div class="filter-group mb-3">
+          <span class="filter-label">状态：</span>
+          <div class="btn-group btn-group-sm" data-filter-key="open">
+            <button class="btn btn-outline-secondary active" data-filter="all">全部</button>
+            <button class="btn btn-outline-secondary" data-filter="true">开放</button>
+            <button class="btn btn-outline-secondary" data-filter="false">关闭</button>
+          </div>
+        </div>
+
+        <!-- 列表渲染区（render 函数填充 li） -->
+        <ul id="room-list" class="room-list list-unstyled"></ul>
       </div>
     </section>
 
-    <!-- 统计模块 -->
+    <!-- 统计模块：复用作业六的 ECharts + fetch + data.json -->
     <section id="stats" class="page-section">
       <div class="container">
         <h2 class="section-title">校园统计</h2>
-        <p class="text-muted">[ 模块占位 ] 这里将放各类图表：借阅量柱状图、消费折线图、活动参与饼图等。当前为骨架。</p>
+        <p id="stats-source" class="text-muted">数据来源：—</p>
+
+        <div id="stats-status" class="text-muted mb-2">加载中...</div>
+        <div id="bar-chart" style="width:100%;height:420px;"></div>
       </div>
     </section>
   </main>
@@ -94,6 +121,8 @@
 
   <!-- Bootstrap JS bundle（含 Popover/Tooltip，自带 collapse 让手机端导航可折叠） -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- ECharts：复用作业六图表引擎 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
