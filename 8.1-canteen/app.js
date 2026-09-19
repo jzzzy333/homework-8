@@ -8,12 +8,13 @@ console.log('[app] 模块加载开始…');
 
 // 内置兜底：断网 / fetch 失败时使用（内容与 data.json 一致，评分统一 5 分）
 const SEED = [
-  { id: 1, shop: '贵阳水煮菜',       dish: '水煮菜砂锅', canteen: '楠苑', floor: '一楼', score: 5, note: '就是得快点吃，不然肉会在砂锅里闷老' },
+  { id: 1, shop: '贵阳水煮菜',       dish: '水煮菜砂锅', canteen: '楠苑', floor: '一楼', score: 4, note: '就是得快点吃，不然肉会在砂锅里闷老' },
   { id: 2, shop: '硕阳小吃',         dish: '辣子鸡',     canteen: '楠苑', floor: '二楼', score: 5, note: '辣子鸡有锅气' },
-  { id: 3, shop: '承包食堂（三楼）', dish: '家常小炒',   canteen: '楠苑', floor: '三楼', score: 5, note: '菜价普遍比一楼贵，但胜在人少排队快' },
-  { id: 4, shop: '承包食堂（一楼）', dish: '家常小炒',   canteen: '梓园', floor: '一楼', score: 5, note: '便宜又好吃' },
-  { id: 5, shop: '小锅猪肚鸡',       dish: '猪肚鸡',     canteen: '梓园', floor: '二楼', score: 5, note: '同学口口相传的暖胃首选' },
-  { id: 6, shop: '傣味菠萝饭',       dish: '菠萝饭',     canteen: '梓园', floor: '二楼', score: 5, note: '酸甜开胃，一到饭点就排队' }
+  { id: 3, shop: '承包食堂（三楼）', dish: '家常小炒',   canteen: '楠苑', floor: '三楼', score: 4, note: '菜价普遍比一楼贵，但胜在人少排队快' },
+  { id: 4, shop: '承包食堂（一楼）', dish: '家常小炒',   canteen: '梓园', floor: '一楼', score: 4, note: '便宜又好吃' },
+  { id: 5, shop: '小锅猪肚鸡',       dish: '猪肚鸡',     canteen: '梓园', floor: '二楼', score: 4, note: '同学口口相传的暖胃首选' },
+  { id: 6, shop: '傣味菠萝饭',       dish: '菠萝饭',     canteen: '梓园', floor: '二楼', score: 5, note: '酸甜开胃，一到饭点就排队' },
+  { id: 7, shop: '生煎包子铺',       dish: '生煎包',     canteen: '东门', floor: '小吃街', score: 5, note: '好吃无需多言' }
 ];
 
 const STORE_KEY = 'canteen-recs-mine';
@@ -67,6 +68,10 @@ const foodEmpty = document.querySelector('#food-empty');
 
 const starsOf = (score) => '★'.repeat(score) + '☆'.repeat(5 - score);
 
+// 食堂显示名：存储值 → 页面文字（东门 = 东门小吃街，不是"东门食堂"）
+const canteenLabel = (c) =>
+  c === '东门' ? '东门小吃街' : (c === '其他' ? '其他' : c + '食堂');
+
 let showAll = false;
 const toggleAllBtn = document.querySelector('#toggle-all');
 
@@ -106,7 +111,7 @@ const renderFoods = () => {
       card.querySelector('h3').appendChild(b);
     }
     card.querySelector('.food-meta').textContent =
-      [it.canteen + '食堂', it.floor].filter(Boolean).join(' · ');
+      [canteenLabel(it.canteen), it.floor].filter(Boolean).join(' · ');
     card.querySelector('.food-dish').textContent = '推荐菜品：' + it.dish;
     card.querySelector('.food-note').textContent = it.note || '（这位同学很神秘，没有留下理由）';
     const score = Math.min(5, Math.max(1, it.score || 0));
@@ -179,7 +184,7 @@ const renderChart = () => {
   }
   if (barChart === null) barChart = echarts.init(el);
 
-  const cats = ['楠苑', '梓园', '秋苑', '其他'];
+  const cats = ['楠苑', '梓园', '秋苑', '东门'];
   const countOf = (c) => state.items.filter(it => it.canteen === c).length;
   const avgOf = (c) => {
     const list = state.items.filter(it => it.canteen === c);
@@ -193,7 +198,7 @@ const renderChart = () => {
     tooltip: { trigger: 'axis' },
     legend: { bottom: 0 },
     grid: { left: '3%', right: '4%', bottom: '15%', containLabel: true },
-    xAxis: { type: 'category', data: cats.map(c => c + '食堂'), name: '食堂' },
+    xAxis: { type: 'category', data: cats.map(canteenLabel), name: '食堂' },
     yAxis: [
       { type: 'value', name: '条', minInterval: 1 },
       { type: 'value', name: '分', max: 5 }
@@ -246,7 +251,7 @@ const renderHit = (it) => {
   }
   const meta = document.createElement('div');
   meta.className = 'meta';
-  meta.textContent = [it.canteen + '食堂', it.floor, '推荐菜品：' + it.dish].filter(Boolean).join(' · ');
+  meta.textContent = [canteenLabel(it.canteen), it.floor, '推荐菜品：' + it.dish].filter(Boolean).join(' · ');
   const stars = document.createElement('div');
   stars.className = 'stars';
   stars.textContent = starsOf(it.score) + ' ' + it.score + '/5';

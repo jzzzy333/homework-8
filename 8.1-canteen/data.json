@@ -1,12 +1,13 @@
 {
   "title": "校内食堂推荐榜",
-  "source": "作业三 them-page 内容整理（评分统一 5 分，供后续可视化对比）",
+  "source": "作业三 them-page 内容整理（含东门小吃街，评分供可视化对比）",
   "items": [
-    { "id": 1, "shop": "贵阳水煮菜",       "dish": "水煮菜砂锅", "canteen": "楠苑", "floor": "一楼", "score": 5, "note": "就是得快点吃，不然肉会在砂锅里闷老" },
-    { "id": 2, "shop": "硕阳小吃",         "dish": "辣子鸡",     "canteen": "楠苑", "floor": "二楼", "score": 5, "note": "辣子鸡有锅气" },
-    { "id": 3, "shop": "承包食堂（三楼）", "dish": "家常小炒",   "canteen": "楠苑", "floor": "三楼", "score": 5, "note": "菜价普遍比一楼贵，但胜在人少排队快" },
-    { "id": 4, "shop": "承包食堂（一楼）", "dish": "家常小炒",   "canteen": "梓园", "floor": "一楼", "score": 5, "note": "便宜又好吃" },
-    { "id": 5, "shop": "小锅猪肚鸡",       "dish": "猪肚鸡",     "canteen": "梓园", "floor": "二楼", "score": 5, "note": "同学口口相传的暖胃首选" },
-    { "id": 6, "shop": "傣味菠萝饭",       "dish": "菠萝饭",     "canteen": "梓园", "floor": "二楼", "score": 5, "note": "酸甜开胃，一到饭点就排队" }
+    { "id": 1, "shop": "贵阳水煮菜",       "dish": "水煮菜砂锅", "canteen": "楠苑", "floor": "一楼",   "score": 4, "note": "就是得快点吃，不然肉会在砂锅里闷老" },
+    { "id": 2, "shop": "硕阳小吃",         "dish": "辣子鸡",     "canteen": "楠苑", "floor": "二楼",   "score": 5, "note": "辣子鸡有锅气" },
+    { "id": 3, "shop": "承包食堂（三楼）", "dish": "家常小炒",   "canteen": "楠苑", "floor": "三楼",   "score": 4, "note": "菜价普遍比一楼贵，但胜在人少排队快" },
+    { "id": 4, "shop": "承包食堂（一楼）", "dish": "家常小炒",   "canteen": "梓园", "floor": "一楼",   "score": 4, "note": "便宜又好吃" },
+    { "id": 5, "shop": "小锅猪肚鸡",       "dish": "猪肚鸡",     "canteen": "梓园", "floor": "二楼",   "score": 4, "note": "同学口口相传的暖胃首选" },
+    { "id": 6, "shop": "傣味菠萝饭",       "dish": "菠萝饭",     "canteen": "梓园", "floor": "二楼",   "score": 5, "note": "酸甜开胃，一到饭点就排队" },
+    { "id": 7, "shop": "生煎包子铺",       "dish": "生煎包",     "canteen": "东门", "floor": "小吃街", "score": 5, "note": "好吃无需多言" }
   ]
 }

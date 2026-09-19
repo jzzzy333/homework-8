@@ -37,7 +37,7 @@
         <!-- 模块一 · 页面 + 数据：推荐榜单 -->
         <section id="foods" class="col-12 col-lg-7 foods-col">
           <h1 class="section-title">校内食堂推荐店家</h1>
-          <p class="section-subtitle">默认只显示最新 3 条提交</p>
+          <p class="section-subtitle">默认显示最新 3 条提交</p>
           <div class="row g-3" id="food-grid"><!-- renderFoods() 数据驱动填充 --></div>
           <div class="text-center mt-3">
             <button id="toggle-all" class="btn btn-outline-primary btn-sm d-none">查看全部</button>
@@ -67,6 +67,7 @@
                     <option value="楠苑">楠苑食堂</option>
                     <option value="梓园">梓园食堂</option>
                     <option value="秋苑">秋苑食堂</option>
+                    <option value="东门">东门小吃街</option>
                     <option value="其他">其他</option>
                   </select>
                 </div>
@@ -93,13 +94,6 @@
               </div>
             </form>
             <hr>
-            <h6 class="text-muted">怎么玩</h6>
-            <ol class="text-muted small mb-0">
-              <li>填写店家、菜品并打分（满分 5 分）→ 提交</li>
-              <li>榜单立刻多一张带评分星的卡片</li>
-              <li>评分数据实时计入下方「数据看板」</li>
-              <li>数据存浏览器 localStorage，刷新不丢</li>
-            </ol>
           </div>
         </section>
       </div>
