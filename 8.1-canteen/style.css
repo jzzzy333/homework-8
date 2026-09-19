@@ -89,6 +89,19 @@ body {
 .navbar-dark .nav-link:hover { color: #fff; }
 .navbar-dark .nav-link.active { color: #fff; font-weight: 600; }
 
+/* ===== 店家评分查询结果 ===== */
+.search-hit {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  max-width: 560px;
+}
+.search-hit .shop { font-weight: 600; font-size: 1.05rem; }
+.search-hit .meta { color: #6c757d; font-size: 0.9rem; margin: 4px 0; }
+.search-hit .stars { color: #f59f00; letter-spacing: 2px; font-size: 1.05rem; }
+
 /* 自查表结果列绿色标注：质量自查实测后接入 */
 
 /* ===== footer ===== */

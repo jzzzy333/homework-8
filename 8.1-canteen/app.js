@@ -167,6 +167,78 @@ toggleAllBtn.addEventListener('click', () => {
   renderFoods();
 });
 
+/* ===== 模块四：店家评分查询（搜不到 → 跳转我来推荐并预填） ===== */
+
+const searchForm = document.querySelector('#search-form');
+const searchInput = document.querySelector('#search-input');
+const searchResult = document.querySelector('#search-result');
+
+const renderHit = (it) => {
+  const hit = document.createElement('div');
+  hit.className = 'search-hit';
+  const head = document.createElement('div');
+  head.className = 'd-flex align-items-center gap-2';
+  const shop = document.createElement('span');
+  shop.className = 'shop';
+  shop.textContent = it.shop;
+  if (it.mine) {
+    const b = document.createElement('span');
+    b.className = 'badge badge-mine';
+    b.textContent = '我的推荐';
+    head.appendChild(shop);
+    head.appendChild(b);
+  } else {
+    head.appendChild(shop);
+  }
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+  meta.textContent = [it.canteen + '食堂', it.floor, '推荐菜品：' + it.dish].filter(Boolean).join(' · ');
+  const stars = document.createElement('div');
+  stars.className = 'stars';
+  stars.textContent = starsOf(it.score) + ' ' + it.score + '/5';
+  hit.appendChild(head);
+  hit.appendChild(meta);
+  hit.appendChild(stars);
+  return hit;
+};
+
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const q = searchInput.value.trim();
+  searchResult.innerHTML = '';
+  if (q === '') {
+    searchResult.appendChild(Object.assign(document.createElement('p'), {
+      className: 'text-muted mb-0',
+      textContent: '请先输入店家名字'
+    }));
+    return;
+  }
+  const matches = state.items.filter(it =>
+    it.shop.includes(q) || (it.dish && it.dish.includes(q))
+  );
+  console.log('[app] 店家查询：「' + q + '」命中', matches.length, '条');
+  if (matches.length === 0) {
+    const tip = Object.assign(document.createElement('p'), {
+      className: 'text-muted mb-2',
+      textContent: `没有找到「${q}」的评分记录。`
+    });
+    const goAdd = document.createElement('button');
+    goAdd.id = 'go-add';
+    goAdd.className = 'btn btn-warning btn-sm';
+    goAdd.textContent = '找不到店家？我来添加';
+    goAdd.addEventListener('click', () => {
+      document.querySelector('#shop').value = q;                 // 预填店家名
+      document.querySelector('#recommend').scrollIntoView({ behavior: 'smooth' });
+      document.querySelector('#shop').focus();
+      setTip('店家名已帮你填好，补上菜品和评分就完成添加', true);
+    });
+    searchResult.appendChild(tip);
+    searchResult.appendChild(goAdd);
+    return;
+  }
+  matches.forEach(it => searchResult.appendChild(renderHit(it)));
+});
+
 /* ===== 导航滚动高亮（骨架自带） ===== */
 const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 const sections = document.querySelectorAll('main section');

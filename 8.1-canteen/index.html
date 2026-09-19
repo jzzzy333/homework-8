@@ -24,7 +24,7 @@
           <li class="nav-item"><a class="nav-link" href="#foods">推荐榜单</a></li>
           <li class="nav-item"><a class="nav-link" href="#recommend">我来推荐</a></li>
           <li class="nav-item"><a class="nav-link" href="#chart">数据看板</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">质量自查</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">店家查询</a></li>
         </ul>
       </div>
     </div>
@@ -117,11 +117,20 @@
       </div>
     </section>
 
-    <!-- 模块四 · 自查记录占位（断网 / 空数据 / 三档宽度 / Console，后续检查点实测后填写） -->
+    <!-- 模块四 · 交互：店家评分查询（搜不到 → 一键跳转「我来推荐」并预填店家名） -->
     <section id="about" class="page-section bg-light">
       <div class="container">
-        <h2 class="section-title">质量自查记录</h2>
-        <p class="text-muted">[ 模块占位 ] 将按课程质量清单填写：断网、空数据、三档宽度、Console 四项实测结果。</p>
+        <h2 class="section-title">店家评分查询</h2>
+        <p class="text-muted">输入店家名字（或菜品关键字），查看它在榜单中的评分；没收录？当场补一票。</p>
+        <form id="search-form" class="row g-2 align-items-center" novalidate>
+          <div class="col-12 col-sm-7 col-md-5">
+            <input type="text" id="search-input" class="form-control" placeholder="例：硕阳小吃 / 辣子鸡" maxlength="20">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary">搜索评分</button>
+          </div>
+        </form>
+        <div id="search-result" class="mt-4"></div>
       </div>
     </section>
   </main>
