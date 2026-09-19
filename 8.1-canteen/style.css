@@ -12,13 +12,30 @@ body {
   min-height: 100vh;
 }
 
-/* ===== 区块布局（复用 8.0 integration 的 page-section 方案） ===== */
+/* ===== 区块布局 ===== */
 .page-section {
   min-height: calc(100vh - 56px);
   padding: 90px 0 60px;
   scroll-margin-top: 70px;
 }
-#chart, #foods { padding-bottom: 40px; }
+
+/* 首屏：模块一（榜单）与模块二（我来推荐）同屏并排 */
+.top-wrap { padding-top: 88px; padding-bottom: 24px; }
+.foods-col, .recommend-col {
+  scroll-margin-top: 80px;
+  min-height: auto;
+}
+.rec-panel {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+}
+/* 窄屏下首屏仍为上下两块，去掉大屏撑满逻辑 */
+@media (max-width: 991.98px) {
+  .top-wrap { padding-top: 76px; }
+}
 
 .section-title { font-weight: 700; margin-bottom: 8px; }
 .section-subtitle { color: #6c757d; margin-bottom: 24px; }

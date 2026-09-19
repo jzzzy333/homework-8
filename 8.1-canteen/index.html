@@ -31,26 +31,25 @@
   </nav>
 
   <main>
-    <!-- 模块一 · 页面 + 数据：推荐榜单（数据驱动渲染；评分星与后续可视化共用 score 字段） -->
-    <section id="foods" class="page-section">
-      <div class="container">
-        <h1 class="section-title">校内食堂推荐店家</h1>
-        <p class="section-subtitle">默认只显示最新 3 条提交 · 复用作业三 them-page 内容（已全部打 5 分）</p>
-        <div class="row g-3" id="food-grid"><!-- renderFoods() 数据驱动填充 --></div>
-        <div class="text-center mt-3">
-          <button id="toggle-all" class="btn btn-outline-primary btn-sm d-none">查看全部</button>
-        </div>
-        <p id="food-empty" class="empty-tip d-none">暂无推荐，快去「我来推荐」抢个首帖～</p>
-      </div>
-    </section>
+    <!-- 首屏：模块一（榜单，只显示最新 3 条）与模块二（我来推荐）同屏并排 -->
+    <div class="container top-wrap">
+      <div class="row g-4">
+        <!-- 模块一 · 页面 + 数据：推荐榜单 -->
+        <section id="foods" class="col-12 col-lg-7 foods-col">
+          <h1 class="section-title">校内食堂推荐店家</h1>
+          <p class="section-subtitle">默认只显示最新 3 条提交</p>
+          <div class="row g-3" id="food-grid"><!-- renderFoods() 数据驱动填充 --></div>
+          <div class="text-center mt-3">
+            <button id="toggle-all" class="btn btn-outline-primary btn-sm d-none">查看全部</button>
+          </div>
+          <p id="food-empty" class="empty-tip d-none">暂无推荐，快去「我来推荐」抢个首帖～</p>
+        </section>
 
-    <!-- 模块二 · 交互：我来推荐（店家 + 菜品 + 5 分制打分，提交后联动榜单与后续可视化） -->
-    <section id="recommend" class="page-section bg-light">
-      <div class="container">
-        <h2 class="section-title">我来推荐</h2>
-        <p class="text-muted">提交后立即写入榜单（保存在本机浏览器，刷新不丢），评分将用于后续的数据看板。</p>
-        <div class="row">
-          <div class="col-lg-6">
+        <!-- 模块二 · 交互：我来推荐 -->
+        <section id="recommend" class="col-12 col-lg-5 recommend-col">
+          <div class="rec-panel">
+            <h2 class="section-title">我来推荐</h2>
+            <p class="text-muted small">提交后立即写入榜单（存本机浏览器，刷新不丢），评分计入数据看板。</p>
             <form id="rec-form" novalidate>
               <div class="mb-3">
                 <label for="shop" class="form-label">店家名字 <span class="req">*</span></label>
@@ -93,27 +92,25 @@
                 <span id="form-tip" class="form-tip"></span>
               </div>
             </form>
+            <hr>
+            <h6 class="text-muted">怎么玩</h6>
+            <ol class="text-muted small mb-0">
+              <li>填写店家、菜品并打分（满分 5 分）→ 提交</li>
+              <li>榜单立刻多一张带评分星的卡片</li>
+              <li>评分数据实时计入下方「数据看板」</li>
+              <li>数据存浏览器 localStorage，刷新不丢</li>
+            </ol>
           </div>
-          <div class="col-lg-6">
-            <div class="rec-side">
-              <h5>怎么玩</h5>
-              <ol class="text-muted mb-0">
-                <li>填写店家、菜品并打分（满分 5 分）→ 提交</li>
-                <li>榜单立刻多一张带评分星的卡片</li>
-                <li>评分数据会进入后续「数据看板」的图表</li>
-                <li>数据存浏览器 localStorage，刷新不丢</li>
-              </ol>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
-    </section>
+    </div>
 
-    <!-- 模块三 · 数据可视化占位：数据看板（ECharts 图表将在后续检查点接入） -->
+    <!-- 模块三 · 数据可视化：数据看板（ECharts 双轴：推荐数量 + 平均评分） -->
     <section id="chart" class="page-section">
       <div class="container">
         <h2 class="section-title">数据看板</h2>
-        <p class="text-muted">[ 模块占位 ] 这里将放各食堂推荐热度柱状图，与榜单共用同一份数据。</p>
+        <p id="chart-source" class="text-muted">数据来源：—</p>
+        <div id="bar-chart" style="width:100%;height:420px;"></div>
       </div>
     </section>
 
@@ -137,11 +134,12 @@
 
   <footer class="footer py-3 bg-dark text-light">
     <div class="container text-center">
-      <small>云大干饭指南 · 作业 8.1 骨架 · 页面 + 样式 + 交互 + 数据可视化 四模块规划 · 口味主观仅供参考</small>
+      <small>云大干饭指南 · 作业 8.1 · 页面 + 样式 + 交互 + 数据可视化 四模块整合 · 口味主观仅供参考</small>
     </div>
   </footer>
 
   <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="libs/echarts.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

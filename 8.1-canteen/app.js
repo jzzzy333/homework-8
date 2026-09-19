@@ -88,7 +88,7 @@ const renderFoods = () => {
 
   shown.forEach(it => {
     const col = document.createElement('div');
-    col.className = 'col-12 col-sm-6 col-lg-4';
+    col.className = 'col-12'; // 榜单与表单同屏并排，卡片在半栏内单列堆叠
     const card = document.createElement('article');
     card.className = 'food-card';
     card.innerHTML = `
@@ -150,14 +150,14 @@ form.addEventListener('submit', (e) => {
 
   form.reset();
   setTip('提交成功！评分 ' + score + ' 分已计入榜单', true);
-  renderFoods();
+  renderAll();
   console.log('[app] 交互模块：新推荐已入列 →', shop, '·', dish, '·', score + '分');
 });
 
 document.querySelector('#clear-mine').addEventListener('click', () => {
   saveMine([]);
   state.items = state.items.filter(it => !it.mine);
-  renderFoods();
+  renderAll();
   console.log('[app] 已清除我的推荐，剩余', state.items.length, '条');
 });
 
@@ -166,6 +166,60 @@ toggleAllBtn.addEventListener('click', () => {
   showAll = !showAll;
   renderFoods();
 });
+
+/* ===== 模块三：数据看板（ECharts 双轴：推荐数量 + 平均评分，实时消费 score） ===== */
+
+let barChart = null;
+
+const renderChart = () => {
+  const el = document.querySelector('#bar-chart');
+  if (typeof echarts === 'undefined') {
+    el.innerHTML = '<p class="text-muted">图表库未加载（libs/echarts.min.js 缺失）</p>';
+    return;
+  }
+  if (barChart === null) barChart = echarts.init(el);
+
+  const cats = ['楠苑', '梓园', '秋苑', '其他'];
+  const countOf = (c) => state.items.filter(it => it.canteen === c).length;
+  const avgOf = (c) => {
+    const list = state.items.filter(it => it.canteen === c);
+    if (list.length === 0) return null; // 无数据时不画点
+    const sum = list.reduce((s, it) => s + (it.score || 0), 0);
+    return +(sum / list.length).toFixed(1);
+  };
+
+  barChart.setOption({
+    title: { text: '各食堂推荐热度与平均评分', subtext: '左轴：条 · 右轴：分（满分 5）', left: 'center' },
+    tooltip: { trigger: 'axis' },
+    legend: { bottom: 0 },
+    grid: { left: '3%', right: '4%', bottom: '15%', containLabel: true },
+    xAxis: { type: 'category', data: cats.map(c => c + '食堂'), name: '食堂' },
+    yAxis: [
+      { type: 'value', name: '条', minInterval: 1 },
+      { type: 'value', name: '分', max: 5 }
+    ],
+    series: [
+      {
+        name: '推荐数量', type: 'bar', barWidth: '35%', yAxisIndex: 0,
+        data: cats.map(countOf), itemStyle: { color: '#0d6efd' }
+      },
+      {
+        name: '平均评分', type: 'line', yAxisIndex: 1,
+        data: cats.map(avgOf), itemStyle: { color: '#f59f00' },
+        label: { show: true, formatter: (p) => p.data == null ? '' : p.data + '分' }
+      }
+    ]
+  });
+
+  document.querySelector('#chart-source').textContent =
+    '数据来源：' + state.source + '；实时合并「我来推荐」提交';
+};
+
+window.addEventListener('resize', () => {
+  if (barChart) barChart.resize();
+});
+
+const renderAll = () => { renderFoods(); renderChart(); };
 
 /* ===== 模块四：店家评分查询（搜不到 → 跳转我来推荐并预填） ===== */
 
@@ -256,8 +310,8 @@ window.addEventListener('scroll', onScroll);
 
 /* ===== 启动 ===== */
 initData().then(() => {
-  renderFoods();
+  renderAll();
   onScroll();
-  console.log('[app] 已接入模块：页面 ✓ 样式 ✓ 交互 ✓ 数据 ✓（可视化待接入，score 字段已就绪）');
-  window.__foodApp = { state, renderFoods }; // 调试句柄：供空数据等用例实测
+  console.log('[app] 四模块全部就绪：页面 ✓ 样式 ✓ 交互 ✓ 数据可视化 ✓');
+  window.__foodApp = { state, renderAll }; // 调试句柄：供空数据等用例实测
 });
