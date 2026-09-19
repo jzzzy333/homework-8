@@ -1,0 +1,5 @@
+{
+  "placeholder": "骨架阶段占位，下一步接入自习室空位、统计图表、3D 场景数据",
+  "modules": ["study-room", "stats", "campus3d"],
+  "version": "skeleton-1.0"
+}

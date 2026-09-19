@@ -1,0 +1,72 @@
+/* 自定义样式 · 校园信息中心骨架 */
+
+/* 每个区块至少一屏，且顶部预留 70px 让固定 navbar 不挡标题 */
+.page-section {
+  min-height: calc(100vh - 56px);
+  padding: 90px 0 60px;
+  scroll-margin-top: 70px;
+  display: flex;
+  align-items: center;
+}
+
+/* 首页用居中布局，其他页左对齐即可 */
+#home .container { width: 100%; }
+
+/* 标题层级 + 副标题 */
+.section-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  color: #6c757d;
+  margin-bottom: 24px;
+}
+
+/* 卡片：悬浮上浮 + 阴影加重，鼠标移开平滑回落 */
+.module-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid #e9ecef;
+}
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* navbar 链接 active 态（JS 滚动同步高亮当前区块） */
+.navbar-dark .nav-link.active {
+  color: #fff;
+  font-weight: 600;
+}
+.navbar-dark .nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s;
+}
+.navbar-dark .nav-link:hover {
+  color: #fff;
+}
+
+/* 校园三维页占位区 */
+.placeholder-3d {
+  width: 100%;
+  min-height: 360px;
+  border: 2px dashed #ced4da;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  background: repeating-linear-gradient(
+    45deg,
+    #f8f9fa,
+    #f8f9fa 12px,
+    #ffffff 12px,
+    #ffffff 24px
+  );
+}
+
+/* footer 不漂浮 */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
