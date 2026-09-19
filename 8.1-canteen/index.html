@@ -31,63 +31,81 @@
   </nav>
 
   <main>
-    <!-- 模块一 · 页面：推荐榜单（静态复用作业三 them-page 的 6 条内容；筛选交互后续检查点接入） -->
+    <!-- 模块一 · 页面 + 数据：推荐榜单（数据驱动渲染；评分星与后续可视化共用 score 字段） -->
     <section id="foods" class="page-section">
       <div class="container">
         <h1 class="section-title">校内食堂推荐店家</h1>
-        <p class="section-subtitle">复用作业三 them-page 内容 · 筛选与数据驱动将在后续检查点接入</p>
-        <div class="row g-3">
-          <div class="col-12 col-sm-6 col-lg-4">
-            <article class="food-card">
-              <h3>贵阳水煮菜</h3>
-              <div class="food-meta">楠苑食堂 · 一楼</div>
-              <p>就是得快点吃，不然肉会在砂锅里闷老</p>
-            </article>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4">
-            <article class="food-card">
-              <h3>硕阳小吃辣子鸡</h3>
-              <div class="food-meta">楠苑食堂 · 二楼</div>
-              <p>辣子鸡有锅气</p>
-            </article>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4">
-            <article class="food-card">
-              <h3>三楼承包食堂</h3>
-              <div class="food-meta">楠苑食堂 · 三楼</div>
-              <p>菜价普遍比一楼贵，但胜在人少排队快</p>
-            </article>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4">
-            <article class="food-card">
-              <h3>承包食堂</h3>
-              <div class="food-meta">梓园食堂 · 一楼</div>
-              <p>便宜又好吃</p>
-            </article>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4">
-            <article class="food-card">
-              <h3>小锅猪肚鸡</h3>
-              <div class="food-meta">梓园食堂 · 二楼</div>
-              <p>同学口口相传的暖胃首选</p>
-            </article>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4">
-            <article class="food-card">
-              <h3>傣味菠萝饭</h3>
-              <div class="food-meta">梓园食堂 · 二楼</div>
-              <p>酸甜开胃，一到饭点就排队</p>
-            </article>
-          </div>
+        <p class="section-subtitle">默认只显示最新 3 条提交 · 复用作业三 them-page 内容（已全部打 5 分）</p>
+        <div class="row g-3" id="food-grid"><!-- renderFoods() 数据驱动填充 --></div>
+        <div class="text-center mt-3">
+          <button id="toggle-all" class="btn btn-outline-primary btn-sm d-none">查看全部</button>
         </div>
+        <p id="food-empty" class="empty-tip d-none">暂无推荐，快去「我来推荐」抢个首帖～</p>
       </div>
     </section>
 
-    <!-- 模块二 · 交互占位：我来推荐（表单 + localStorage 将在后续检查点实现） -->
+    <!-- 模块二 · 交互：我来推荐（店家 + 菜品 + 5 分制打分，提交后联动榜单与后续可视化） -->
     <section id="recommend" class="page-section bg-light">
       <div class="container">
         <h2 class="section-title">我来推荐</h2>
-        <p class="text-muted">[ 模块占位 ] 这里将放推荐表单（菜品 / 食堂 / 楼层 / 理由），提交后写入榜单与数据看板。</p>
+        <p class="text-muted">提交后立即写入榜单（保存在本机浏览器，刷新不丢），评分将用于后续的数据看板。</p>
+        <div class="row">
+          <div class="col-lg-6">
+            <form id="rec-form" novalidate>
+              <div class="mb-3">
+                <label for="shop" class="form-label">店家名字 <span class="req">*</span></label>
+                <input type="text" class="form-control" id="shop" placeholder="例：硕阳小吃" maxlength="20">
+              </div>
+              <div class="mb-3">
+                <label for="dish" class="form-label">推荐菜品 <span class="req">*</span></label>
+                <input type="text" class="form-control" id="dish" placeholder="例：辣子鸡" maxlength="20">
+              </div>
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <label for="canteen" class="form-label">食堂 <span class="req">*</span></label>
+                  <select id="canteen" class="form-select">
+                    <option value="">请选择</option>
+                    <option value="楠苑">楠苑食堂</option>
+                    <option value="梓园">梓园食堂</option>
+                    <option value="秋苑">秋苑食堂</option>
+                    <option value="其他">其他</option>
+                  </select>
+                </div>
+                <div class="col-6 mb-3">
+                  <label for="score" class="form-label">评分（满分 5 分） <span class="req">*</span></label>
+                  <select id="score" class="form-select">
+                    <option value="">请选择</option>
+                    <option value="5">5 分 · 神仙店家</option>
+                    <option value="4">4 分 · 值得一吃</option>
+                    <option value="3">3 分 · 还行</option>
+                    <option value="2">2 分 · 一般</option>
+                    <option value="1">1 分 · 踩雷</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="note" class="form-label">推荐理由（选填，60 字内）</label>
+                <textarea id="note" class="form-control" rows="2" maxlength="60" placeholder="一句话安利"></textarea>
+              </div>
+              <div class="d-flex align-items-center gap-3 flex-wrap">
+                <button type="submit" class="btn btn-primary">提交推荐</button>
+                <button type="button" id="clear-mine" class="btn btn-outline-danger btn-sm">清除我的推荐</button>
+                <span id="form-tip" class="form-tip"></span>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6">
+            <div class="rec-side">
+              <h5>怎么玩</h5>
+              <ol class="text-muted mb-0">
+                <li>填写店家、菜品并打分（满分 5 分）→ 提交</li>
+                <li>榜单立刻多一张带评分星的卡片</li>
+                <li>评分数据会进入后续「数据看板」的图表</li>
+                <li>数据存浏览器 localStorage，刷新不丢</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

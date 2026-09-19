@@ -50,7 +50,39 @@ body {
   margin-bottom: 6px;
 }
 .food-card p { margin-bottom: 6px; }
-/* .food-votes / .badge-mine（票数与"我的推荐"徽章）：交互模块接入时添加 */
+.food-card .food-dish { color: #495057; font-size: 0.95rem; }
+.food-card .food-note { color: #6c757d; font-size: 0.9rem; }
+.food-card .food-score { color: #d9480f; font-size: 0.95rem; }
+.food-card .food-score .stars { color: #f59f00; letter-spacing: 2px; }
+.food-card .badge-mine {
+  background: #ffc107;
+  color: #663c00;
+  font-size: 0.7rem;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ===== 空状态 ===== */
+.empty-tip {
+  text-align: center;
+  color: #adb5bd;
+  padding: 40px 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* ===== 我来推荐表单 ===== */
+.req { color: #dc3545; }
+.form-tip { font-size: 0.9rem; }
+.form-tip.err { color: #dc3545; }
+.form-tip.ok  { color: #198754; }
+.rec-side {
+  background: #fff;
+  border: 1px dashed #ced4da;
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+}
 
 /* ===== 导航高亮（滚动同步） ===== */
 .navbar-dark .nav-link { color: rgba(255,255,255,0.7); transition: color 0.2s; }
