@@ -7,6 +7,8 @@
   <!-- 本地离线库（复用 homework-6 的 libs）：断网也能保持样式完整 -->
   <link href="libs/bootstrap.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
+  <!-- A-Frame 必须在 <head> 中、scene 之前加载 -->
+  <script src="libs/aframe.min.js"></script>
 </head>
 <body>
 
@@ -25,6 +27,7 @@
           <li class="nav-item"><a class="nav-link" href="#recommend">我来推荐</a></li>
           <li class="nav-item"><a class="nav-link" href="#chart">数据看板</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">店家查询</a></li>
+          <li class="nav-item"><a class="nav-link" href="#campus3d">校园三维</a></li>
         </ul>
       </div>
     </div>
@@ -122,6 +125,58 @@
           </div>
         </form>
         <div id="search-result" class="mt-4"></div>
+      </div>
+    </section>
+    <!-- 模块五 · 三维展示：四个食堂的 A-Frame 长方体场景 -->
+    <section id="campus3d" class="page-section">
+      <div class="container">
+        <h2 class="section-title">校园三维导览</h2>
+        <p class="text-muted">四个食堂的三维示意（鼠标拖动转视角 / WASD 移动）：</p>
+        <p class="text-muted small mb-3">
+          <span style="color:#c0392b">■</span> ① 东门小吃街
+          <span style="color:#e67e22" class="ms-3">■</span> ② 秋苑食堂
+          <span style="color:#2980b9" class="ms-3">■</span> ③ 楠苑食堂
+          <span style="color:#27ae60" class="ms-3">■</span> ④ 梓园食堂
+        </p>
+        <div class="aframe-stage">
+          <a-scene embedded class="aframe-canvas" vr-mode-ui="enabled: false">
+
+            <!-- 天空 + 地面 -->
+            <a-sky color="#aee3f7"></a-sky>
+            <a-plane position="0 0 -2" rotation="-90 0 0" width="32" height="16" color="#8bc34a"></a-plane>
+            <!-- 前方道路 -->
+            <a-plane position="0 0.01 4" rotation="-90 0 0" width="32" height="2.5" color="#616161"></a-plane>
+
+            <!-- 环境光 + 方向光 -->
+            <a-light type="ambient" color="#ffffff" intensity="0.7"></a-light>
+            <a-light type="directional" position="6 12 6" intensity="0.9"></a-light>
+
+            <!-- ① 东门小吃街：长条形长方体 -->
+            <a-box position="-10 0.75 -2" width="5" height="1.5" depth="1.2" color="#c0392b">
+              <a-text value="东门小吃街" position="0 0 0.65" align="center" color="#ffffff" width="4.2"></a-text>
+            </a-box>
+
+            <!-- ② 秋苑食堂：主楼 + 附楼小长方体 -->
+            <a-box position="-3.5 1 -2" width="2.6" height="2" depth="2.5" color="#e67e22">
+              <a-text value="秋苑食堂" position="0 0 1.3" align="center" color="#ffffff" width="2.3"></a-text>
+            </a-box>
+            <a-box position="-1.8 0.6 -2" width="1.2" height="1.2" depth="1.2" color="#d35400"></a-box>
+
+            <!-- ③ 楠苑食堂：大型长方体 -->
+            <a-box position="3 1.8 -3" width="3.6" height="3.6" depth="3.5" color="#2980b9">
+              <a-text value="楠苑食堂" position="0 0 1.8" align="center" color="#ffffff" width="3.1"></a-text>
+            </a-box>
+
+            <!-- ④ 梓园食堂：长方体 -->
+            <a-box position="10 1.6 -3" width="3" height="3.2" depth="3" color="#27ae60">
+              <a-text value="梓园食堂" position="0 0 1.55" align="center" color="#ffffff" width="2.6"></a-text>
+            </a-box>
+
+            <!-- 相机：平视校园，可拖动 / WASD -->
+            <a-camera position="0 2.8 11" look-controls="reverseMouseTouch: false"
+                      wasd-controls="acceleration: 15"></a-camera>
+          </a-scene>
+        </div>
       </div>
     </section>
   </main>

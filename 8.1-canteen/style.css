@@ -124,6 +124,23 @@ body {
 /* ===== footer ===== */
 .footer { margin-top: auto; }
 
+/* ===== A-Frame 三维舞台容器 ===== */
+.aframe-stage {
+  width: 100%;
+  height: 480px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+  background: #aee3f7;
+}
+.aframe-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+@media (max-width: 575.98px) {
+  .aframe-stage { height: 360px; }
+}
+
 /* ===== 三档宽度自适应说明 =====
    卡片栅格在 HTML 上：col-12（手机1列）/ col-sm-6（平板2列）/ col-lg-4（桌面3列）
    导航在 <992px 折叠为汉堡菜单（navbar-expand-lg），均为 Bootstrap 标准断点 */
